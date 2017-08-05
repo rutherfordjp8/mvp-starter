@@ -1,0 +1,6 @@
+@import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
+#displayImg img {
+  width: 50px;
+  height: 60px;
+}
