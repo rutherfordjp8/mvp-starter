@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
-
-const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dgtbep2jz/upload';
+var axios = require('axios');
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/rutherfordjp/upload';
 const CLOUDINARY_UPLOAD_PRESET = 'rtxtxpz0';
 
 class App extends React.Component {
@@ -65,18 +65,30 @@ var getUpload = function() {
     formData.append('file', this.currentImgFile);
     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
-    $.ajax({
+    axios({
       url: CLOUDINARY_URL,
       method: 'POST',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      data: formData,
-      success: function(data) {
-        console.log('Successful post');
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      error: function(err) {
-        console.error('Failed to post: ', err);
-      }
-    })
+      data: formData
+    }).then(function(resolve) {
+      console.log('Successful Post', resolve);
+    }).catch(function(err) {
+      console.error('Error: ', err);
+    });
+    // $.ajax({
+    //   url: CLOUDINARY_URL,
+    //   method: 'POST',
+    //   'Content-Type': 'application/x-www-form-urlencoded',
+    //   data: formData,
+    //   success: function(data) {
+    //     console.log('Successful post');
+    //   },
+    //   error: function(err) {
+    //     console.error('Failed to post: ', err);
+    //   }
+    // })
 
   }
 };
